@@ -1,0 +1,12 @@
+/* CSS declarations go here */
+span.createdAt {
+  color: blue;
+}
+
+span.updatedAt {
+  color: green;
+}
+
+span.closedAt {
+  color: red;
+}

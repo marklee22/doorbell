@@ -1,0 +1,47 @@
+<head>
+  <title>Hack Reactor Doorbell</title>
+</head>
+
+<body>
+  {{> lockedOutMain }}
+</body>
+
+<template name="lockedOutMain">
+  <div id="content">
+    {{loginButtons align="right"}}
+    <div class="lockedOut-title">
+      {{#if request}}
+      <h1>{{requestor}} is locked out</h1>
+      {{/if}}
+    </div>
+    <div class="lockedOut-form">
+      {{#if responder}}
+      <h2>{{responder}} has claimed the request!</h2>
+      {{else}}
+        {{#if request}}
+        <h2>Claim the request</h2>
+        <button class="respond">Claim Request!</button>
+        {{else}}
+        <button class="request">I'm locked out!</button>
+        {{/if}}
+      {{/if}}
+    </div>
+    <div class="lockedOut-history">
+      <h2>Locked Out History</h2>
+      {{#each lockoutEntries}}
+        {{> lockedOutHistoryEntry }}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="lockedOutHistoryEntry">
+  <div class="lockedOut-history-entry">
+    <span class="id">{{_id}}</span>
+    <span class="createdAt">{{formatTime createdAt}}</span>
+    <span class="updatedAt">{{formatTime claimedAt}}</span>
+    <span class="closedAt">{{formatTime closedAt}}</span>
+    <span class="requestor">{{requestorName}}</span>
+    <span class="responder">{{responderName}}</span>
+  </div>
+</template>
