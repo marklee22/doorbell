@@ -11,37 +11,44 @@
     {{loginButtons align="right"}}
     <div class="lockedOut-title">
       {{#if request}}
-      <h1>{{requestor}} is locked out</h1>
+        <h1>{{requestMessage}}</h1>
       {{/if}}
     </div>
     <div class="lockedOut-form">
-      {{#if responder}}
-      <h2>{{responder}} has claimed the request!</h2>
-      {{else}}
-        {{#if request}}
-        <h2>Claim the request</h2>
-        <button class="respond">Claim Request!</button>
+      {{#if request}}
+        {{#if claimed}}
         {{else}}
-        <button class="request">I'm locked out!</button>
+        <button class="claim">{{claimMessage}} Request!</button>
         {{/if}}
+      {{else}}
+      <button class="request">I'm locked out!</button>
       {{/if}}
     </div>
     <div class="lockedOut-history">
-      <h2>Locked Out History</h2>
-      {{#each lockoutEntries}}
-        {{> lockedOutHistoryEntry }}
-      {{/each}}
+      <h2>Doorbell History</h2>
+      <table class="lockedOut-history-table">
+        <thead>
+          <th>Created</th>
+          <th>Claimed</th>
+          <th>Requestor</th>
+          <th>Claimer</th>
+        </thead>
+        <tbody>
+        {{#each lockoutEntries}}
+          {{> lockedOutHistoryEntry }}
+        {{/each}}
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
 
 <template name="lockedOutHistoryEntry">
-  <div class="lockedOut-history-entry">
-    <span class="id">{{_id}}</span>
-    <span class="createdAt">{{formatTime createdAt}}</span>
-    <span class="updatedAt">{{formatTime claimedAt}}</span>
-    <span class="closedAt">{{formatTime closedAt}}</span>
-    <span class="requestor">{{requestorName}}</span>
-    <span class="responder">{{responderName}}</span>
-  </div>
+  <tr class="lockedOut-history-entry {{cancelled}}">
+    <td class="createdAt">{{formatTime createdAt}}</td>
+    <td class="claimedAt">{{formatTime claimedAt}}</td>
+<!--     <td class="closedAt">{{formatTime closedAt}}</td>
+ -->    <td class="requestor">{{requestorName}}</td>
+    <td class="claimer">{{claimerName}}</td>
+  </tr>
 </template>

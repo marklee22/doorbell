@@ -1,12 +1,31 @@
 /* CSS declarations go here */
-span.createdAt {
-  color: blue;
+
+.lockedOut-history-table {
+  border: 1px solid black;
 }
 
-span.updatedAt {
+.lockedOut-history-table td {
+  border-left: 1px solid black;
+  padding: 5px;
+}
+
+.lockedOut-history-table th {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+td.createdAt {
+  color: red;
+}
+
+td.claimedAt {
   color: green;
 }
 
-span.closedAt {
-  color: red;
+td.closedAt {
+  color: gray;
+}
+
+tr.cancelled {
+  text-decoration: line-through;
 }
